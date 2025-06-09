@@ -1,0 +1,13 @@
+[
+  {
+    "nome": "maila",
+    "cpf": "000.000.000-99",
+    "endereco": "Rua da ressurreiçã",
+    "telefone": "719888888",
+    "email": "maila@gmail.com",
+    "senha": "vfbdf",
+    "banco": "bradesco",
+    "agencia": "8888",
+    "conta": "7777"
+  }
+]
