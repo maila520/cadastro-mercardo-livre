@@ -30,14 +30,12 @@ document.getElementById('form-consumidor').addEventListener('submit', function (
     e.preventDefault();
 
     const nome = document.getElementById('nomeConsumidor').value;
-    const CPF = document.getElementById('cpfConsumidor').value;
+    const cpf = document.getElementById('cpfConsumidor').value;
     const endereco = document.getElementById('enderecoConsumidor').value;
     const telefone = document.getElementById('telefoneConsumidor').value;
     const email = document.getElementById('emailConsumidor').value;
     const senha = document.getElementById('senhaConsumidor').value;
 
-
-    const cpf = document.getElementById('cpfConsumidor').value;
 
     if (!validarCPF(cpf)) {
         Swal.fire({
@@ -49,5 +47,61 @@ document.getElementById('form-consumidor').addEventListener('submit', function (
         return;
     }
 
+    const consumidor = {
+        nome, cpf, endereco, telefone, email, senha
+    };
+
+    let consumidores = JSON.parse(localStorage.getItem("consumidores")) || [];
+    consumidores.push(consumidor);
+    localStorage.setItem("consumidores", JSON.stringify(consumidores));
+
+    Swal.fire({
+        title: "Consumidor cadastrado com sucesso!",
+        icon: "success",
+        draggable: true
+    });
+    this.reset();
 });
+
+
+document.getElementById('form-vendedorr').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const nome = document.getElementById('nomeVendedor').value;
+    const cpf = document.getElementById('cpfVendedor').value;
+    const endereco = document.getElementById('enderecoVendedor').value;
+    const telefone = document.getElementById('telefoneVendedor').value;
+    const email = document.getElementById('emailVendedor').value;
+    const senha = document.getElementById('senhaVendedor').value;
+    const banco = document.getElementById('bancoVendedor').value;
+    const agencia = document.getElementById('agenciaVendedor').value;
+    const conta = document.getElementById('contaVendedor').value;
+
+
+    if (!validarCPF(cpf)) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "CPF inválido. Use o formato xxx.xxx.xxx-xx",
+            footer: '<a href="#">Why do I have this issue?</a>'
+        });
+        return;
+    }
+
+    const consumidor = {
+        nome, cpf, endereco, telefone, email, senha, banco, agencia, conta
+    };
+
+    let consumidores = JSON.parse(localStorage.getItem("consumidores")) || [];
+    consumidores.push(consumidor);
+    localStorage.setItem("consumidores", JSON.stringify(consumidores));
+
+    Swal.fire({
+        title: "Vendedor cadastrado com sucesso!",
+        icon: "success",
+        draggable: true
+    });
+    this.reset();
+});
+
 
