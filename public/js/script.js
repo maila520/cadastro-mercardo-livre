@@ -1,31 +1,16 @@
-document.getElementById('form-produto').addEventListener('submit', function (e) {
-    e.preventDefault();
+function abrirModal(titulo, mensagem) {
+    const modalElement = document.getElementById('meuModal');
+    const modalTitle = modalElement.querySelector('.modal-title');
+    const modalBody = modalElement.querySelector('.modal-body');
 
-    const nome = document.getElementById('nomeProduto').value;
-    const descricao = document.getElementById('descricaoProduto').value;
-    const preco = document.getElementById('precoProduto').value;
-    const prazo = document.getElementById('prazoProduto').value;
+    modalTitle.textContent = titulo;
+    modalBody.textContent = mensagem;
 
-    const produtoDiv = document.createElement('div');
-    produtoDiv.innerHTML = `
-    <p><strong>Nome:</strong> ${nome}</p>
-    <p><strong>Descrição:</strong> ${descricao}</p>
-    <p><strong>Preço:</strong> R$ ${preco}</p>
-    <p><strong>Prazo de Entrega:</strong> ${prazo}</p>
-    <button onclick="this.parentElement.remove()">Excluir</button>
-    <hr>
-  `;
-
-    document.getElementById('lista-produtos').appendChild(produtoDiv);
-
-
-    this.reset();
-});
-
-function validarCPF(cpf) {
-    const regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-    return regex.test(cpf);
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
 }
+
+
 document.getElementById('form-consumidor').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -59,12 +44,11 @@ document.getElementById('form-consumidor').addEventListener('submit', async func
     });
 
     if (resposta.ok) {
-        Swal.fire({
-            title: "Consumidor cadastrado com sucesso!",
-            icon: "success",
-            draggable: true
-        })
-        this.reset();
+        if (resposta.ok) {
+            abrirModal("Sucesso!", "Consumidor cadastrado com sucesso!");
+            this.reset();
+        }
+
     } else {
         Swal.fire({
             icon: "error",
@@ -80,7 +64,7 @@ document.getElementById('form-consumidor').addEventListener('submit', async func
 
 
 
-document.getElementById('form-vendedor').addEventListener('submit',async function (e) {
+document.getElementById('form-vendedor').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const nome = document.getElementById('nomeVendedor').value;
@@ -115,12 +99,11 @@ document.getElementById('form-vendedor').addEventListener('submit',async functio
     });
 
     if (resposta.ok) {
-        Swal.fire({
-            title: "Vendedor cadastrado com sucesso!",
-            icon: "success",
-            draggable: true
-        })
-        this.reset();
+        if (resposta.ok) {
+            abrirModal("Sucesso!", "vendedor cadastrado com sucesso!");
+            this.reset();
+        }
+
     } else {
         Swal.fire({
             icon: "error",
@@ -133,4 +116,46 @@ document.getElementById('form-vendedor').addEventListener('submit',async functio
 });
 
 
+document.getElementById('form-produto').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
+    const nome = document.getElementById('nomeProduto').value;
+    const descricao = document.getElementById('descricaoProduto').value;
+    const preco = document.getElementById('precoProduto').value;
+    const prazo_entrega = document.getElementById('prazoProduto').value;
+
+    const produto = {
+        nome,
+        descricao,
+        preco,
+        prazo_entrega
+    };
+    console.log(produto)
+
+    try {
+        const resposta = await fetch('/api/produtos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(produto)
+        });
+
+        if (resposta.ok) {
+            if (resposta.ok) {
+                abrirModal("Sucesso!", "Produto cadastrado com sucesso!");
+                this.reset();
+            }
+
+        } else {
+            throw new Error("Erro no servidor");
+        }
+    } catch (err) {
+        console.error(err);
+        Swal.fire({
+            icon: "error",
+            title: "Erro ao cadastrar!",
+            text: err.message
+        });
+    }
+});
