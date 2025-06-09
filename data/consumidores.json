@@ -50,5 +50,13 @@
     "banco": "bradesco",
     "agencia": "8888",
     "conta": "7777"
+  },
+  {
+    "nome": "nata",
+    "cpf": "123.445.573-94",
+    "endereco": "nvbvebvlel",
+    "telefone": "(47) 92075-209257",
+    "email": "natanantan@gmail.com",
+    "senha": "nlvwinvlnlnk"
   }
 ]

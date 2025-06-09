@@ -69,6 +69,19 @@ app.post('/api/produtos', (req, res) => {
     }
 });
 
+
+app.get('/api/consumidor', (req, res) => {
+    const caminho = path.join(__dirname, 'data', 'consumidores.json');
+    if (fs.existsSync(caminho)) {
+        const conteudo = fs.readFileSync(caminho, 'utf-8');
+        res.json(JSON.parse(conteudo));
+    } else {
+        res.json([]); // Retorna lista vazia se o arquivo não existir
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
+
