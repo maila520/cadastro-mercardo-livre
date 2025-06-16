@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumidores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Consumidores</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">
+                            Página Inicial
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <h1 class="main-title">
+            <i class="fas fa-users"></i>
+            Consumidor
+        </h1>
+
+        <div class="card-container">
+            <div class="action-card">
+                <div class="card-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h3 class="card-title">Cadastro de Consumidor</h3>
+                <p class="card-description">
+                    Registre novos consumidores com informações básicas e dados de contato
+                </p>
+                <button class="action-btn" data-bs-toggle="modal" data-bs-target="#modal-consumidor">
+                    <i class="fas fa-plus-circle"></i>
+                    Cadastrar Consumidor
+                </button>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- Modal Consumidor -->
+    <div class="modal fade" id="modal-consumidor" tabindex="-1" aria-labelledby="modalConsumidorLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConsumidorLabel">
+                        <i class="fas fa-user-plus"></i>
+                        Cadastro de Consumidor
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-consumidor">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nomeConsumidor" placeholder="Nome completo"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cpfConsumidor"
+                                placeholder="CPF (xxx.xxx.xxx-xx)" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="enderecoConsumidor"
+                                placeholder="Endereço completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" id="telefoneConsumidor" placeholder="Telefone"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="emailConsumidor" placeholder="E-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="senhaConsumidor" placeholder="Senha"
+                                required>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i>
+                            Cadastrar Consumidor
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- Modal para mensagens de sucesso -->
+    <div class="modal fade" id="meuModal" tabindex="-1" aria-labelledby="meuModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="meuModalLabel">Título</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Mensagem
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="tabela-consumidores" class="table table-striped table-hover" width="100%">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Senha</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 12px;">
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="./js/consumidores.js"></script>
+</body>
+
+</html>
